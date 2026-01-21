@@ -1,11 +1,19 @@
-import jwt, { TokenExpiredError } from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 // import { AppError } from "../errors/AppError";
+import { jwtSecret } from "../constants/jwt-secret";
 
-const secret = process.env.JWT_SECRET;
+interface IPayload {
+  email: string;
+  password: string;
+}
 
-interface IPayload {}
+export const genToken = (payload: IPayload) => {
+  const accessToken = sign(payload, jwtSecret, {
+    expiresIn: 86400, // 1 dia
+  });
 
-export const genToken = (payload: IPayload) => {};
+  return accessToken;
+};
 
 export const verifyToken = (token: string) => {
   try {
