@@ -52,17 +52,13 @@ export class AuthService {
 
     userLoginSchema.parse(loginData);
 
-    const isValidCredentials =
-      await this.userService.getLoginCredentials(loginData);
+    const searchedUser = await this.userService.getLoginCredentials(loginData);
 
-    if (!isValidCredentials) {
+    if (!searchedUser) {
       throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
     }
 
-    const samePasswords = await bcrypt.compare(
-      password,
-      isValidCredentials.password,
-    );
+    const samePasswords = await bcrypt.compare(password, searchedUser.password);
 
     if (!samePasswords) {
       throw new AppError(
@@ -73,6 +69,6 @@ export class AuthService {
 
     const accessToken = genToken(loginData);
 
-    return { accessToken };
+    return { token: accessToken, user: searchedUser };
   };
 }

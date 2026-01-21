@@ -23,9 +23,8 @@ export class UserService {
   };
 
   getLoginCredentials = async (loginData: TUserLogin) => {
-    const isValidCredentials =
-      await this.userModel.findLoginCredentials(loginData);
+    const searchedUser = await this.userModel.findLoginCredentials(loginData);
 
-    return isValidCredentials;
+    return searchedUser;
   };
 }

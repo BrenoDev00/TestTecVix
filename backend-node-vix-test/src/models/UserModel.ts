@@ -12,16 +12,25 @@ export class UserModel {
   };
 
   findLoginCredentials = async (loginData: TUserLogin) => {
-    const isValidCredentials = await prisma.user.findFirst({
+    const searchedUser = await prisma.user.findFirst({
       where: {
         email: loginData.email,
       },
       select: {
+        createdAt: true,
+        deletedAt: true,
         email: true,
+        idBrandMaster: true,
+        idUser: true,
+        isActive: true,
+        profileImgUrl: true,
+        role: true,
+        updatedAt: true,
+        username: true,
         password: true,
       },
     });
 
-    return isValidCredentials;
+    return searchedUser;
   };
 }

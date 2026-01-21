@@ -22,11 +22,9 @@ interface IUserLoginResponse {
   };
 }
 
-
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsOpenModalUserNotActive, setLoginTime } =
-    useZGlobalVar();
+  const { setIsOpenModalUserNotActive, setLoginTime } = useZGlobalVar();
   const { setUser } = useZUserProfile();
   const { resetAllStates } = useZResetAllStates();
   const navigate = useNavigate();
@@ -47,7 +45,7 @@ export const useLogin = () => {
     }
 
     const response = await api.post<IUserLoginResponse>({
-      url: "/user/login",
+      url: "/auth/login",
       data: {
         username: username || undefined,
         password,
@@ -76,6 +74,8 @@ export const useLogin = () => {
       role: response.data.user.role,
     });
     setLoginTime(new Date());
+
+    return navigate("/");
   };
 
   const goLogout = () => {
