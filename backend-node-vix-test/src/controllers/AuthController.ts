@@ -11,4 +11,10 @@ export class AuthController {
 
     return res.status(STATUS_CODE.CREATED).send(createdUser);
   };
+
+  postLogin = async (req: Request, res: Response) => {
+    const accessToken = await this.authService.login(req.body);
+
+    return res.status(STATUS_CODE.OK).send(accessToken);
+  };
 }

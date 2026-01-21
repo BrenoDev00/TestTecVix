@@ -5,9 +5,14 @@ import {
 import { EmailService } from "./EmailService";
 import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { UserService } from "./UserService";
-import { hash } from "bcryptjs";
+import bcrypt, { hash } from "bcryptjs";
 import { AppError } from "../errors/AppError";
 import { STATUS_CODE } from "../constants/statusCode";
+import {
+  TUserLogin,
+  userLoginSchema,
+} from "../types/validations/User/userLogin";
+import { genToken } from "../utils/jwt";
 
 export class AuthService {
   constructor() {}
@@ -40,5 +45,34 @@ export class AuthService {
     });
 
     return createdUser;
+  };
+
+  login = async (loginData: TUserLogin) => {
+    const { password } = loginData;
+
+    userLoginSchema.parse(loginData);
+
+    const isValidCredentials =
+      await this.userService.getLoginCredentials(loginData);
+
+    if (!isValidCredentials) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    const samePasswords = await bcrypt.compare(
+      password,
+      isValidCredentials.password,
+    );
+
+    if (!samePasswords) {
+      throw new AppError(
+        ERROR_MESSAGE.INVALID_CREDENTIALS,
+        STATUS_CODE.BAD_REQUEST,
+      );
+    }
+
+    const accessToken = genToken(loginData);
+
+    return { accessToken };
   };
 }
