@@ -32,6 +32,11 @@ export class UserModel {
       },
       select: {
         idUser: true,
+        idBrandMaster: true,
+        createdAt: true,
+        updatedAt: true,
+        deletedAt: true,
+        profileImgUrl: true,
         username: true,
         email: true,
         lastLoginDate: true,

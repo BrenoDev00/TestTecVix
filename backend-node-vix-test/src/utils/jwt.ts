@@ -6,7 +6,6 @@ import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { STATUS_CODE } from "../constants/statusCode";
 interface IPayload {
   idUser: string;
-  email: string;
 }
 
 export const genToken = (payload: IPayload) => {

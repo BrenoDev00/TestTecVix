@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { UserService } from "../services/UserService";
 import { STATUS_CODE } from "../constants/statusCode";
 import { CustomRequest } from "../types/custom";
@@ -11,5 +11,11 @@ export class UserController {
     const result = await this.userService.listAll(req.query);
 
     return res.status(STATUS_CODE.OK).json(result);
+  };
+
+  getUserToken = async (req: Request, res: Response) => {
+    const accessToken = await this.userService.getNewUserToken(req);
+
+    return res.status(STATUS_CODE.OK).json({ token: accessToken });
   };
 }

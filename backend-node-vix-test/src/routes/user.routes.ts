@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { API_VERSION, ROOT_PATH } from "../constants/basePathRoutes";
-import { isManagerOrIsAdmin } from "../auth/isManagerOrIsAdmin";
 import { authUser } from "../auth/authUser";
 import { UserController } from "../controllers/UserController";
 
@@ -14,4 +13,10 @@ export const makeUserController = () => {
 
 const userController = makeUserController();
 
-userRoutes.get(BASE_PATH, authUser, userController.getUsers);
+userRoutes.get(`${BASE_PATH}/access`, authUser, userController.getUsers);
+
+userRoutes.get(
+  `${BASE_PATH}/token/:idUser`,
+  authUser,
+  userController.getUserToken,
+);

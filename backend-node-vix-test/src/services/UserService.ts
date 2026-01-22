@@ -1,8 +1,13 @@
+import { Request } from "express";
 import { prisma } from "../database/client";
 import { UserModel } from "../models/UserModel";
 import { querySchema } from "../types/validations/Queries/queryListAll";
 import { TUserCreated } from "../types/validations/User/createUser";
 import { TUserLogin } from "../types/validations/User/userLogin";
+import { AppError } from "../errors/AppError";
+import { ERROR_MESSAGE } from "../constants/erroMessages";
+import { STATUS_CODE } from "../constants/statusCode";
+import { genToken } from "../utils/jwt";
 
 export class UserService {
   private readonly userModel = new UserModel();
@@ -16,7 +21,20 @@ export class UserService {
   listById = async (userId: string) => {
     const searchedUser = await this.userModel.findById(userId);
 
+    if (!searchedUser)
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+
     return searchedUser;
+  };
+
+  getNewUserToken = async (req: Request) => {
+    const idUser = req.params.id as string;
+
+    const searchedUser = await this.listById(idUser);
+
+    const accessToken = genToken({ idUser: searchedUser.idUser });
+
+    return accessToken;
   };
 
   createNewUser = async (userData: TUserCreated) => {
