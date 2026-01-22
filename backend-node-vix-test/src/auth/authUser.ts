@@ -8,7 +8,7 @@ import { user } from "@prisma/client";
 
 export const authUser = async (
   req: CustomRequest<user>,
-  res: Response,
+  _: Response,
   next: NextFunction,
 ) => {
   const { authorization } = req.headers;
@@ -17,12 +17,11 @@ export const authUser = async (
   }
   const token = authorization.split(" ")[1];
 
-  // const idUser = verifyToken(token);
-  // const user = //
+  const isValidUser = verifyToken(token);
 
-  // if (isInvalidUser) {
-  //   throw new AppError(ERROR_MESSAGE.UNAUTHORIZED, STATUS_CODE.UNAUTHORIZED);
-  // }
-  // req.user = user;
+  if (!isValidUser) {
+    throw new AppError(ERROR_MESSAGE.UNAUTHORIZED, STATUS_CODE.UNAUTHORIZED);
+  }
+
   return next();
 };
