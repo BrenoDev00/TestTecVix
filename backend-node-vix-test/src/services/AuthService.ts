@@ -67,7 +67,9 @@ export class AuthService {
       );
     }
 
-    const accessToken = genToken(loginData);
+    const { idUser, email } = searchedUser;
+
+    const accessToken = genToken({ idUser, email });
 
     return { token: accessToken, user: searchedUser };
   };

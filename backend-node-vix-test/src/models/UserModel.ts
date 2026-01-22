@@ -11,6 +11,16 @@ export class UserModel {
     return createdUser;
   };
 
+  findById = async (userId: string) => {
+    const searchedUser = await prisma.user.findFirst({
+      where: {
+        idUser: userId,
+      },
+    });
+
+    return searchedUser;
+  };
+
   findLoginCredentials = async (loginData: TUserLogin) => {
     const searchedUser = await prisma.user.findFirst({
       where: {

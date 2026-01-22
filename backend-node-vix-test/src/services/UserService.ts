@@ -6,6 +6,12 @@ import { TUserLogin } from "../types/validations/User/userLogin";
 export class UserService {
   private readonly userModel = new UserModel();
 
+  listById = async (userId: string) => {
+    const searchedUser = await this.userModel.findById(userId);
+
+    return searchedUser;
+  };
+
   verifyIfUserNameAlreadyExists = async (userName: string) => {
     const userNameAlreadyExists = await prisma.user.findFirst({
       where: {
