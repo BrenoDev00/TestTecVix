@@ -52,7 +52,7 @@ export class AuthService {
 
     userLoginSchema.parse(loginData);
 
-    const searchedUser = await this.userService.getLoginCredentials(loginData);
+    const searchedUser = await this.userService.listByLoginEmail(loginData);
 
     if (!searchedUser) {
       throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
