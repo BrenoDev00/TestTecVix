@@ -1,16 +1,19 @@
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import { FilterInput } from "../../../components/Inputs/FilterInput";
 import { FilterIcon } from "../../../icons/FilterIcon";
 import { useZTheme } from "../../../stores/useZTheme";
 import { useTranslation } from "react-i18next";
-import { useZMspRegisterPage } from "../../../stores/useZMspRegisterPage";
-import { CheckboxLabel } from "../../../components/CheckboxLabel";
+import { useZColaboratorRegister } from "../../../stores/useZColaboratorRegister";
 
 export const UserTableFilters = () => {
   const { t } = useTranslation();
   const { theme, mode } = useZTheme();
-  const { mspTableFilter, setMspTableFilter, isPocFilter, setIsPocFilter } =
-    useZMspRegisterPage();
+  const {
+    colaboratorNameFilter,
+    companyNameFilter,
+    setColaboratorNameFilter,
+    setCompanyNameFilter,
+  } = useZColaboratorRegister();
   return (
     <Box
       sx={{
@@ -22,14 +25,14 @@ export const UserTableFilters = () => {
     >
       <FilterInput
         icon={<FilterIcon fill={theme[mode].gray} />}
-        value={mspTableFilter}
-        onChange={setMspTableFilter}
+        value={companyNameFilter}
+        onChange={setCompanyNameFilter}
         placeholder={t("colaboratorRegister.companyFilterPlaceholder")}
       />
       <FilterInput
         icon={<FilterIcon fill={theme[mode].gray} />}
-        value={mspTableFilter}
-        onChange={setMspTableFilter}
+        value={colaboratorNameFilter}
+        onChange={setColaboratorNameFilter}
         placeholder={t("colaboratorRegister.UserFilterPlaceholder")}
       />
     </Box>
