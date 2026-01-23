@@ -97,4 +97,15 @@ export class UserModel {
 
     return searchedUser;
   };
+
+  updateLastLoginDate = async (userId: string) => {
+    await prisma.user.update({
+      where: {
+        idUser: userId,
+      },
+      data: {
+        lastLoginDate: new Date(),
+      },
+    });
+  };
 }

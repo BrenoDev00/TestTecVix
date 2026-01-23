@@ -58,4 +58,12 @@ export class UserService {
 
     return searchedUser;
   };
+
+  updateLastLoginDate = async (req: Request) => {
+    const userId = req.params.idUser as string;
+
+    await this.listById(userId);
+
+    await this.userModel.updateLastLoginDate(userId);
+  };
 }

@@ -18,4 +18,10 @@ export class UserController {
 
     return res.status(STATUS_CODE.OK).json({ token: accessToken });
   };
+
+  putLastLoginDate = async (req: Request, res: Response) => {
+    await this.userService.updateLastLoginDate(req);
+
+    return res.status(STATUS_CODE.NO_CONTENT).send();
+  };
 }

@@ -87,5 +87,19 @@ export const useUserResources = () => {
     return response.data;
   };
 
-  return { isLoading, updateUser, createUserByManager };
+  const updateUserLastLoginDate = async () => {
+    const auth = await getAuth();
+
+    await api.put({
+      auth,
+      url: `/user/lastLoginDate/${idUser}`,
+    });
+  };
+
+  return {
+    isLoading,
+    updateUser,
+    createUserByManager,
+    updateUserLastLoginDate,
+  };
 };

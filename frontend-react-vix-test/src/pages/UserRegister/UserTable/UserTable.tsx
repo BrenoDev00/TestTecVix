@@ -194,8 +194,14 @@ export const UserTable = () => {
                     fontWeight: 400,
                   }}
                 >
-                  {t("colaboratorRegister.lastActivity")}
-                  {user.lastLoginDate?.toLocaleString("pt-BR") || ""}
+                  {t("colaboratorRegister.lastActivity")}{" "}
+                  {user.lastLoginDate
+                    ? new Date(user.lastLoginDate).toLocaleString("pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                      })
+                    : ""}
                 </TextRob12Font2Xs>
               )}
             </Box>
@@ -292,9 +298,11 @@ export const UserTable = () => {
                 "@media (max-width: 600px)": { display: "none" },
               }}
             >
-              <IconButton>
-                <PencilCicleIcon fill={theme[mode].blueMedium} />
-              </IconButton>
+              {role !== "member" && (
+                <IconButton>
+                  <PencilCicleIcon fill={theme[mode].blueMedium} />
+                </IconButton>
+              )}
 
               {role === "admin" && (
                 <IconButton>

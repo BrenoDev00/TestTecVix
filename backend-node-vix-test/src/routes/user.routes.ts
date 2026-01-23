@@ -20,3 +20,9 @@ userRoutes.get(
   authUser,
   userController.getUserToken,
 );
+
+userRoutes.put(
+  `${BASE_PATH}/lastLoginDate/:idUser`,
+  authUser,
+  userController.putLastLoginDate,
+);
