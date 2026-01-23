@@ -96,10 +96,27 @@ export const useUserResources = () => {
     });
   };
 
+  const deleteUser = async (userId: string) => {
+    const auth = await getAuth();
+    setIsLoading(true);
+    const response = await api.delete<IUserDB>({
+      url: `/user/${userId}`,
+      auth,
+    });
+    setIsLoading(false);
+    if (response.error) {
+      toast.error(response.message);
+      return null;
+    }
+
+    return response.data;
+  };
+
   return {
     isLoading,
     updateUser,
     createUserByManager,
     updateUserLastLoginDate,
+    deleteUser,
   };
 };

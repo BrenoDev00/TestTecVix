@@ -19,17 +19,15 @@ export const UserTable = () => {
   const { theme, mode } = useZTheme();
   const { t } = useTranslation();
   const {
-    setUsers,
-    resetAll,
-    setIsEditing,
-    isEditing,
     colaboratorNameFilter,
     companyNameFilter,
+    setModalOpen,
+    setUserToBeDeleted,
   } = useZColaboratorRegister();
 
   const { fetchListUsers, userList } = useListUsers();
 
-  const { role } = useZUserProfile();
+  const { role, idUser } = useZUserProfile();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -298,8 +296,13 @@ export const UserTable = () => {
                   </IconButton>
                 )}
 
-                {role === "admin" && (
-                  <IconButton>
+                {role === "admin" && idUser !== user.idUser && (
+                  <IconButton
+                    onClick={() => {
+                      setUserToBeDeleted(user);
+                      setModalOpen("deletedUser");
+                    }}
+                  >
                     <DeleteForeverIcon sx={{ color: theme[mode].danger }} />
                   </IconButton>
                 )}

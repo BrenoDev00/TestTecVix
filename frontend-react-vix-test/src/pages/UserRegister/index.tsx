@@ -2,67 +2,23 @@ import { Box, Modal, Stack } from "@mui/material";
 import { ScreenFullPage } from "../../components/ScreenFullPage";
 import { TextRob20Font1MB } from "../../components/Text1MB";
 import { useZTheme } from "../../stores/useZTheme";
-import { SampleStepper } from "../../components/SampleStepper";
-import { useZMspRegisterPage } from "../../stores/useZMspRegisterPage";
 import { useTranslation } from "react-i18next";
 import { TextRob16Font1S } from "../../components/Text1S";
 import { UserTableFilters } from "./UserTable/UserTableFilter";
 import { UserTable } from "./UserTable/UserTable";
-// import { MspModal } from "./MspModal";
-// import { ModalDeleteMsp } from "./ModalDeleteMsp";
-import { useEffect, useState } from "react";
-// import { ModalUSerNotCreated } from "./ModalUSerNotCreated";
-// import { ModalDeleteVMsFromMSP } from "./ModalDeleteVMsFromMSP";
-import { useBrandMasterResources } from "../../hooks/useBrandMasterResources";
+import { ModalDeleteUser } from "./ModalDeleteUser";
 import { AbsoluteBackDrop } from "../../components/AbsoluteBackDrop";
-import { useVmResource } from "../../hooks/useVmResource";
+import { useZColaboratorRegister } from "../../stores/useZColaboratorRegister";
+import { useUserResources } from "../../hooks/useUserResources";
 
 export const UserRegisterPage = () => {
   const { theme, mode } = useZTheme();
-  const {
-    activeStep,
-    modalOpen,
-    mspToBeDeleted,
-    setModalOpen,
-    setMspToBeDeleted,
-    setActiveStep,
-    resetAll,
-    setIsEditing,
-    brandMasterDeleted,
-    vmsToBeDeleted,
-    setBrandMasterDeleted,
-    setVmsToBeDeleted,
-  } = useZMspRegisterPage();
+
+  const { setModalOpen, modalOpen, setUserToBeDeleted, userToBeDeleted } =
+    useZColaboratorRegister();
+
   const { t } = useTranslation();
-  const { isLoading } = useBrandMasterResources();
-  const { isLoadingDeleteVM, deleteVM } = useVmResource();
-  const [openModalUserNotCreated, setOpenModalUserNotCreated] = useState(false);
-
-  const resetAllStepStates = () => {
-    setIsEditing([]);
-    setActiveStep(0);
-    resetAll();
-  };
-
-  const handleCancelAfterDeleteMSP = () => {
-    setMspToBeDeleted(null);
-    setModalOpen(null);
-    setMspToBeDeleted(null);
-    setBrandMasterDeleted(null);
-    setVmsToBeDeleted([]);
-    resetAllStepStates();
-  };
-
-  const handleAfterDeleteMSP = async () => {
-    await Promise.all(vmsToBeDeleted.map((vm) => deleteVM(vm.idVM)));
-    handleCancelAfterDeleteMSP();
-  };
-
-  useEffect(() => {
-    return () => {
-      resetAllStepStates();
-    };
-  }, []);
+  const { isLoading } = useUserResources();
 
   return (
     <ScreenFullPage
@@ -115,7 +71,7 @@ export const UserRegisterPage = () => {
       // sxContainer= estilização do componente children
       // sxTitleSubTitle= estilização do componente title e subtitle
     >
-      {Boolean(isLoading || isLoadingDeleteVM) && <AbsoluteBackDrop open />}
+      {Boolean(isLoading) && <AbsoluteBackDrop open />}
       <Stack
         sx={{
           width: "100%",
@@ -165,7 +121,7 @@ export const UserRegisterPage = () => {
           </Stack>
         }
       </Stack>
-      {/* {modalOpen !== null && (
+      {modalOpen !== null && (
         <Modal
           open={modalOpen !== null}
           onClose={() => setModalOpen(null)}
@@ -176,42 +132,18 @@ export const UserRegisterPage = () => {
           }}
         >
           <div>
-            {(modalOpen === "editedMsp" || modalOpen === "createdMsp") && (
-              <MspModal
-                modalType={modalOpen}
-                onClose={() => setModalOpen(null)}
-              />
-            )}
-            {modalOpen === "deletedMsp" && mspToBeDeleted && (
-              <ModalDeleteMsp
-                mspToDelete={mspToBeDeleted}
+            {modalOpen === "deletedUser" && userToBeDeleted && (
+              <ModalDeleteUser
+                userToDelete={userToBeDeleted}
                 onClose={() => {
                   setModalOpen(null);
-                  setMspToBeDeleted(null);
+                  setUserToBeDeleted(null);
                 }}
               />
             )}
           </div>
         </Modal>
-      )} */}
-      {/* {openModalUserNotCreated && (
-        <ModalUSerNotCreated
-          open={openModalUserNotCreated}
-          onClose={() => {
-            setOpenModalUserNotCreated(false);
-            resetAllStepStates();
-          }}
-        />
-      )} */}
-      {/* {Boolean(brandMasterDeleted) && (
-        <ModalDeleteVMsFromMSP
-          onClose={handleCancelAfterDeleteMSP}
-          onConfirm={handleAfterDeleteMSP}
-          open={Boolean(brandMasterDeleted)}
-          msp={brandMasterDeleted}
-          vms={vmsToBeDeleted}
-        />
-      )} */}
+      )}
     </ScreenFullPage>
   );
 };
