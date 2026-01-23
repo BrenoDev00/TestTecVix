@@ -66,4 +66,14 @@ export class UserService {
 
     await this.userModel.updateLastLoginDate(userId);
   };
+
+  deleteUserById = async (req: Request) => {
+    const userId = req.params.idUser as string;
+
+    await this.listById(userId);
+
+    const deletedUser = await this.userModel.deleteById(userId);
+
+    return deletedUser;
+  };
 }

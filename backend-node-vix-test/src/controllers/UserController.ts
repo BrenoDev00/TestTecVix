@@ -24,4 +24,10 @@ export class UserController {
 
     return res.status(STATUS_CODE.NO_CONTENT).send();
   };
+
+  deleteUser = async (req: Request, res: Response) => {
+    const deletedUser = await this.userService.deleteUserById(req);
+
+    return res.status(STATUS_CODE.OK).send(deletedUser);
+  };
 }

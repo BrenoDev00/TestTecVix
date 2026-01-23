@@ -108,4 +108,14 @@ export class UserModel {
       },
     });
   };
+
+  deleteById = async (userId: string) => {
+    const deletedUser = await prisma.user.delete({
+      where: {
+        idUser: userId,
+      },
+    });
+
+    return deletedUser;
+  };
 }

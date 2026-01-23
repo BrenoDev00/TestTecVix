@@ -26,3 +26,5 @@ userRoutes.put(
   authUser,
   userController.putLastLoginDate,
 );
+
+userRoutes.delete(`${BASE_PATH}/:idUser`, authUser, userController.deleteUser);
