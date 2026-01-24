@@ -36,6 +36,13 @@ userRoutes.put(
   userController.putLastLoginDate,
 );
 
+userRoutes.put(
+  `${BASE_PATH}/:idUser`,
+  authUser,
+  isManagerOrIsAdmin,
+  userController.putUpdateUser,
+);
+
 userRoutes.delete(
   `${BASE_PATH}/:idUser`,
   authUser,

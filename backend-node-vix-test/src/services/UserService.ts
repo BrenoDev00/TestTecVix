@@ -12,6 +12,7 @@ import { userCreatedSchema } from "../types/validations/User/createUser";
 import { BrandMasterService } from "./BrandMasterService";
 import { EmailService } from "./EmailService";
 import { hash } from "bcryptjs";
+import { userUpdatedSchema } from "../types/validations/User/updateUser";
 
 export class UserService {
   private readonly userModel = new UserModel();
@@ -97,6 +98,23 @@ export class UserService {
     await this.listById(userId);
 
     await this.userModel.updateLastLoginDate(userId);
+  };
+
+  updateUserById = async (req: Request) => {
+    const userId = req.params.idUser as string;
+    const { body } = req;
+
+    userUpdatedSchema.parse(body);
+
+    await this.listById(userId);
+
+    if (body.idBrandMaster) {
+      await this.brandMasterService.getById(body.idBrandMaster);
+    }
+
+    const updatedUser = await this.userModel.updateById(userId, body);
+
+    return updatedUser;
   };
 
   deleteUserById = async (req: Request) => {

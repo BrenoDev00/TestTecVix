@@ -1,6 +1,7 @@
 import { prisma } from "../database/client";
 import { TQuery } from "../types/validations/Queries/queryListAll";
 import { TUserCreated } from "../types/validations/User/createUser";
+import { TUserUpdated } from "../types/validations/User/updateUser";
 import { TUserLogin } from "../types/validations/User/userLogin";
 
 export class UserModel {
@@ -107,6 +108,15 @@ export class UserModel {
         lastLoginDate: new Date(),
       },
     });
+  };
+
+  updateById = async (userId: string, userData: TUserUpdated) => {
+    const updatedUser = await prisma.user.update({
+      where: { idUser: userId },
+      data: { ...userData, updatedAt: new Date() },
+    });
+
+    return updatedUser;
   };
 
   deleteById = async (userId: string) => {

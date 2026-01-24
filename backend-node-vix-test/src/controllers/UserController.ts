@@ -31,6 +31,12 @@ export class UserController {
     return res.status(STATUS_CODE.NO_CONTENT).send();
   };
 
+  putUpdateUser = async (req: Request, res: Response) => {
+    const updatedUser = await this.userService.updateUserById(req);
+
+    return res.status(STATUS_CODE.OK).send(updatedUser);
+  };
+
   deleteUser = async (req: Request, res: Response) => {
     const deletedUser = await this.userService.deleteUserById(req);
 
