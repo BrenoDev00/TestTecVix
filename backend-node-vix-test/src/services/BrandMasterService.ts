@@ -10,7 +10,7 @@ import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { STATUS_CODE } from "../constants/statusCode";
 
 export class BrandMasterService {
-  constructor() { }
+  constructor() {}
   private brandMasterModel = new BrandMasterModel();
 
   async getSelf(domain: string) {
@@ -18,7 +18,16 @@ export class BrandMasterService {
   }
 
   async getById(idBrandMaster: number) {
-    return this.brandMasterModel.getById(idBrandMaster);
+    const searchedBrandMaster =
+      await this.brandMasterModel.getById(idBrandMaster);
+
+    if (!searchedBrandMaster)
+      throw new AppError(
+        ERROR_MESSAGE.BRAND_MASTER_NOT_FOUND,
+        STATUS_CODE.NOT_FOUND,
+      );
+
+    return searchedBrandMaster;
   }
 
   async listAll(query: unknown) {
@@ -63,13 +72,8 @@ export class BrandMasterService {
       throw new AppError(ERROR_MESSAGE.UNAUTHORIZED, STATUS_CODE.UNAUTHORIZED);
     }
     const validData = brandMasterSchema.parse(data);
-    const oldBrandMaster = await this.brandMasterModel.getById(idBrandMaster);
-    if (!oldBrandMaster) {
-      throw new AppError(
-        ERROR_MESSAGE.BRAND_MASTER_NOT_FOUND,
-        STATUS_CODE.NOT_FOUND,
-      );
-    }
+
+    const oldBrandMaster = await this.getById(idBrandMaster);
 
     if (
       !oldBrandMaster.contract &&
@@ -96,13 +100,7 @@ export class BrandMasterService {
   }
 
   async deleteBrandMaster(idBrandMaster: number, user: user) {
-    const oldBrandMaster = await this.brandMasterModel.getById(idBrandMaster);
-    if (!oldBrandMaster) {
-      throw new AppError(
-        ERROR_MESSAGE.BRAND_MASTER_NOT_FOUND,
-        STATUS_CODE.NOT_FOUND,
-      );
-    }
+    await this.getById(idBrandMaster);
 
     const deletedBrand =
       await this.brandMasterModel.deleteBrandMaster(idBrandMaster);

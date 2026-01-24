@@ -13,6 +13,12 @@ export class UserController {
     return res.status(STATUS_CODE.OK).json(result);
   };
 
+  postCreateUser = async (req: Request, res: Response) => {
+    const createdUser = await this.userService.createNewUser(req.body);
+
+    return res.status(STATUS_CODE.CREATED).json(createdUser);
+  };
+
   getUserToken = async (req: Request, res: Response) => {
     const accessToken = await this.userService.getNewUserToken(req);
 

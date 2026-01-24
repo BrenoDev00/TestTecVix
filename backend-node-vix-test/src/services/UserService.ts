@@ -8,9 +8,15 @@ import { AppError } from "../errors/AppError";
 import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { STATUS_CODE } from "../constants/statusCode";
 import { genToken } from "../utils/jwt";
+import { userCreatedSchema } from "../types/validations/User/createUser";
+import { BrandMasterService } from "./BrandMasterService";
+import { EmailService } from "./EmailService";
+import { hash } from "bcryptjs";
 
 export class UserService {
   private readonly userModel = new UserModel();
+  private readonly brandMasterService = new BrandMasterService();
+  private readonly emailService = new EmailService();
 
   listAll = async (query: unknown) => {
     const validQuery = querySchema.parse(query);
@@ -37,12 +43,6 @@ export class UserService {
     return accessToken;
   };
 
-  createNewUser = async (userData: TUserCreated) => {
-    const createdUser = await this.userModel.create(userData);
-
-    return createdUser;
-  };
-
   verifyIfUserNameAlreadyExists = async (userName: string) => {
     const userNameAlreadyExists = await prisma.user.findFirst({
       where: {
@@ -51,6 +51,38 @@ export class UserService {
     });
 
     return userNameAlreadyExists;
+  };
+
+  createNewUser = async (userData: TUserCreated) => {
+    const { username, password, email, idBrandMaster } = userData;
+
+    userCreatedSchema.parse(userData);
+
+    const emailAlreadyExists =
+      await this.emailService.checkIfAlreadyExists(email);
+
+    const userNameAlreadyExists =
+      await this.verifyIfUserNameAlreadyExists(username);
+
+    if (userNameAlreadyExists || emailAlreadyExists) {
+      throw new AppError(
+        ERROR_MESSAGE.USER_ALREADY_EXISTS,
+        STATUS_CODE.CONFLICT,
+      );
+    }
+
+    if (idBrandMaster) {
+      await this.brandMasterService.getById(idBrandMaster);
+    }
+
+    const encriptedPassword = await hash(password, 12);
+
+    const createdUser = await this.userModel.create({
+      ...userData,
+      password: encriptedPassword,
+    });
+
+    return createdUser;
   };
 
   listByLoginEmail = async (loginData: TUserLogin) => {
