@@ -109,6 +109,7 @@ export const useUserResources = () => {
       return null;
     }
 
+    toast.success(t("colaboratorRegister.userDeleted"));
     return response.data;
   };
 

@@ -84,6 +84,7 @@ export const UserTable = () => {
       }}
     >
       {[...userList]
+
         .filter((user) => {
           const colaboratorFilter = colaboratorNameFilter.toLowerCase();
           const companyFilter = companyNameFilter.toLowerCase();
@@ -193,7 +194,7 @@ export const UserTable = () => {
                           month: "2-digit",
                           year: "numeric",
                         })
-                      : ""}
+                      : t("colaboratorRegister.noActivity")}
                   </TextRob12Font2Xs>
                 )}
               </Box>
@@ -296,7 +297,7 @@ export const UserTable = () => {
                   </IconButton>
                 )}
 
-                {role === "admin" && idUser !== user.idUser && (
+                {role === "admin" && idUser !== user.idUser ? (
                   <IconButton
                     onClick={() => {
                       setUserToBeDeleted(user);
@@ -305,6 +306,8 @@ export const UserTable = () => {
                   >
                     <DeleteForeverIcon sx={{ color: theme[mode].danger }} />
                   </IconButton>
+                ) : (
+                  <IconButton sx={{ padding: "20px" }}></IconButton>
                 )}
               </Box>
             </Box>
