@@ -110,10 +110,9 @@ export class UserModel {
   };
 
   deleteById = async (userId: string) => {
-    const deletedUser = await prisma.user.delete({
-      where: {
-        idUser: userId,
-      },
+    const deletedUser = prisma.user.update({
+      where: { idUser: userId },
+      data: { updatedAt: new Date(), deletedAt: new Date() },
     });
 
     return deletedUser;
