@@ -393,22 +393,18 @@ O sistema possui três níveis de permissão:
 
 ## 🔑 Credenciais de Teste
 
-> **Importante**: Após implementar o sistema de autenticação, adicione aqui as credenciais de usuários de teste para cada tipo de permissão.
-
-Exemplo:
-
 ```
 Admin:
-  Email: admin@vituax.com
-  Senha: Admin@123
+  Email: marcioadmin@mail.com
+  Senha: Secure12345.
 
 Manager:
-  Email: manager@vituax.com
-  Senha: Manager@123
+  Email: joaomanager@mail.com
+  Senha: Secure12345.
 
 Member:
-  Email: member@vituax.com
-  Senha: Member@123
+  Email: rosamember@mail.com
+  Senha: Secure12345.
 ```
 
 ---
@@ -554,7 +550,7 @@ git commit -m "docs: atualiza README com credenciais de teste"
 
 **Referência visual**: `screenshots/CadastroDeFuncionarios.png`
 
-- [ ] Implementar a tela de **cadastro de funcionários** seguindo a imagem de referência
+- [x] Implementar a tela de **cadastro de funcionários** seguindo a imagem de referência
 - [x] Atentar para a **responsividade**
 - [x] Considerar as **traduções** (i18n)
 

@@ -1,1 +1,38 @@
-{}
+[
+  {
+    "idUser": "337a52ab-dd47-4dce-835f-cee391689c52",
+    "username": "Márcio",
+    "password": "$2a$12$RG0cxwDteQn4V9CQxrJDUu72NwpIN68g9OWS78LCo84ksXU729hgu",
+    "email": "marcioadmin@mail.com",
+    "role": "admin",
+    "isActive": true,
+    "lastLoginDate": "2026-01-24T15:46:05.000Z",
+    "createdAt": "2026-01-23T17:40:06.000Z",
+    "updatedAt": "2026-01-24T16:09:43.000Z",
+    "idBrandMaster": 1
+  },
+  {
+    "idUser": "fed5443f-c783-4631-8c44-36c8de7f243c",
+    "username": "Rosa",
+    "password": "$2a$12$4A2hPNy3hlnSYfny2Hsy.uwErpLJyYiZKFBFlqGqj5SApTiJ7nlJO",
+    "email": "rosamember@mail.com",
+    "role": "member",
+    "isActive": true,
+    "lastLoginDate": "2026-01-24T15:46:05.000Z",
+    "createdAt": "2026-01-23T17:40:06.000Z",
+    "updatedAt": "2026-01-24T16:09:43.000Z",
+    "idBrandMaster": 2
+  },
+  {
+    "idUser": "5506f09d-0647-4e86-96ea-0faf1665627c",
+    "username": "João",
+    "password": "$2a$12$AXQaLZ3WBaExUp8efD53Xu9K1ZLYFXWLIQIa2b4PnBAh9bCm0ArNm",
+    "email": "joaomanager@mail.com",
+    "role": "manager",
+    "isActive": true,
+    "lastLoginDate": "2026-01-24T15:46:05.000Z",
+    "createdAt": "2026-01-23T17:40:06.000Z",
+    "updatedAt": "2026-01-24T16:09:43.000Z",
+    "idBrandMaster": 3
+  }
+]
