@@ -11,6 +11,7 @@ export interface IUserResponse {
   socketId: null | string;
   updatedAt: string | Date;
   username: string;
+  brandMaster: { brandName: string | null } | null;
 }
 
 export interface IPincodeInfos {

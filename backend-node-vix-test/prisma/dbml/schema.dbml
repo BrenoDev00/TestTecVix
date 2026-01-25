@@ -55,6 +55,10 @@ Table vM {
 Table user {
   idUser String [pk]
   username String [not null]
+  fullname String
+  phone String
+  position String
+  department String
   password String [not null]
   email String [not null]
   profileImgUrl String
@@ -62,6 +66,7 @@ Table user {
   idBrandMaster Int
   isActive Boolean [default: true]
   lastLoginDate DateTime
+  hiringDate DateTime
   createdAt DateTime [default: `now()`]
   updatedAt DateTime [default: `now()`]
   deletedAt DateTime
@@ -82,4 +87,4 @@ Enum ERole {
 
 Ref: vM.idBrandMaster > brandMaster.idBrandMaster
 
-Ref: user.idBrandMaster > brandMaster.idBrandMaster
+Ref: user.idBrandMaster > brandMaster.idBrandMaster [delete: Cascade]

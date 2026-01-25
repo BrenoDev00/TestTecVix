@@ -4,8 +4,10 @@ export const API_VERSION = {
 };
 
 export const ROOT_PATH = {
+  AUTH: "/auth",
   HOME: "/",
   BRANDMASTER: "/brand-master",
   VM: "/vm",
   UPLOADS: "/uploads",
+  USER: "/user",
 };

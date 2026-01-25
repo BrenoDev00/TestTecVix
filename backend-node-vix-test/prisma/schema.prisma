@@ -71,6 +71,10 @@ model vM {
 model user {
   idUser        String    @id @default(uuid())
   username      String
+  fullname      String?
+  phone         String?
+  position      String?
+  department    String?
   password      String
   email         String
   profileImgUrl String?
@@ -78,11 +82,12 @@ model user {
   idBrandMaster Int?
   isActive      Boolean?  @default(true)
   lastLoginDate DateTime? @db.DateTime(0)
+  hiringDate    DateTime? @db.DateTime(0)
   createdAt     DateTime? @default(now()) @db.DateTime(0)
   updatedAt     DateTime? @default(now()) @db.DateTime(0)
   deletedAt     DateTime? @db.DateTime(0)
 
-  brandMaster brandMaster? @relation(fields: [idBrandMaster], references: [idBrandMaster])
+  brandMaster brandMaster? @relation(fields: [idBrandMaster], references: [idBrandMaster], onDelete: Cascade)
 
   @@index([idBrandMaster], map: "user_idBrandMaster_fkey")
 }

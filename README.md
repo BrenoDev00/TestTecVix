@@ -90,8 +90,8 @@ Para que seu teste seja considerado, **é OBRIGATÓRIO (não opcional)** que sua
 > **📢 IMPORTANTE**: Seu repositório fork **DEVE SER PÚBLICO** para que a equipe da Vituax possa avaliar seu trabalho.
 
 Certifique-se de que:
-- [ ] Seu repositório está configurado como **público** (não privado)
-- [ ] A equipe da Vituax consegue acessar o link sem necessidade de permissões especiais
+- [x] Seu repositório está configurado como **público** (não privado)
+- [x] A equipe da Vituax consegue acessar o link sem necessidade de permissões especiais
 
 ### 📤 Entrega do Teste
 
@@ -108,14 +108,14 @@ Ao finalizar o teste, você deve:
 
 Antes de enviar, certifique-se de que:
 
-- [ ] O código está no **seu repositório pessoal** do GitHub
-- [ ] O repositório está configurado como **público** (não privado)
-- [ ] A branch `main` contém o projeto original
-- [ ] A branch `release` contém todas as suas modificações
-- [ ] Existe um Pull Request da `release` para a `main` **no seu repositório**
-- [ ] O README está atualizado com suas modificações
-- [ ] O projeto está funcionando corretamente
-- [ ] As credenciais de teste estão documentadas
+- [x] O código está no **seu repositório pessoal** do GitHub
+- [x] O repositório está configurado como **público** (não privado)
+- [x] A branch `main` contém o projeto original
+- [x] A branch `release` contém todas as suas modificações
+- [x] Existe um Pull Request da `release` para a `main` **no seu repositório**
+- [x] O README está atualizado com suas modificações
+- [x] O projeto está funcionando corretamente
+- [x] As credenciais de teste estão documentadas
 
 > **🎯 LEMBRE-SE**: O link que você enviará deve ser do formato:
 > `https://github.com/SEU-USUARIO/TestTecVix`
@@ -393,22 +393,18 @@ O sistema possui três níveis de permissão:
 
 ## 🔑 Credenciais de Teste
 
-> **Importante**: Após implementar o sistema de autenticação, adicione aqui as credenciais de usuários de teste para cada tipo de permissão.
-
-Exemplo:
-
 ```
 Admin:
-  Email: admin@vituax.com
-  Senha: Admin@123
+  Email: marcioadmin@mail.com
+  Senha: Secure12345.
 
 Manager:
-  Email: manager@vituax.com
-  Senha: Manager@123
+  Email: joaomanager@mail.com
+  Senha: Secure12345.
 
 Member:
-  Email: member@vituax.com
-  Senha: Member@123
+  Email: rosamember@mail.com
+  Senha: Secure12345.
 ```
 
 ---
@@ -462,21 +458,21 @@ git commit -m "docs: atualiza README com credenciais de teste"
 
 ### 📋 Configuração Inicial
 
-- [ ] Criar arquivo `.env` baseado no `.env.example` (backend)
-- [ ] Criar arquivo `.env` baseado no `.env.example` (frontend)
+- [x] Criar arquivo `.env` baseado no `.env.example` (backend)
+- [x] Criar arquivo `.env` baseado no `.env.example` (frontend)
 
 ---
 
 ### 🔐 Autenticação e Autorização
 
-- [ ] Implementar as rotas de CRUD para usuários
-- [ ] Implementar rota de login do usuário
-- [ ] Implementar tela de login `/login`
-- [ ] Implementar rota de register do usuário
-- [ ] Implementar tela de register `/register`
-- [ ] Implementar autenticação com token JWT
-- [ ] Proteger as rotas da aplicação (exceto login e register) para que somente usuários logados possam acessar
-- [ ] Adicionar credenciais de usuários de teste no README e/ou `.env.example`
+- [x] Implementar as rotas de CRUD para usuários
+- [x] Implementar rota de login do usuário
+- [x] Implementar tela de login `/login`
+- [x] Implementar rota de register do usuário
+- [x] Implementar tela de register `/register`
+- [x] Implementar autenticação com token JWT
+- [x] Proteger as rotas da aplicação (exceto login e register) para que somente usuários logados possam acessar
+- [x] Adicionar credenciais de usuários de teste no README e/ou `.env.example`
 
 ---
 
@@ -554,9 +550,9 @@ git commit -m "docs: atualiza README com credenciais de teste"
 
 **Referência visual**: `screenshots/CadastroDeFuncionarios.png`
 
-- [ ] Implementar a tela de **cadastro de funcionários** seguindo a imagem de referência
-- [ ] Atentar para a **responsividade**
-- [ ] Considerar as **traduções** (i18n)
+- [x] Implementar a tela de **cadastro de funcionários** seguindo a imagem de referência
+- [x] Atentar para a **responsividade**
+- [x] Considerar as **traduções** (i18n)
 
 ---
 
@@ -699,9 +695,9 @@ Antes de enviar seu teste, **certifique-se de que**:
 
 ### 📌 Estrutura de Branches e Pull Request
 
-- [ ] **Existe a branch `main`** com o projeto original (sem modificações)
-- [ ] **Existe a branch `release`** com todas as suas alterações implementadas
-- [ ] **Existe um Pull Request aberto** da branch `release` para a branch `main`
+- [x] **Existe a branch `main`** com o projeto original (sem modificações)
+- [x] **Existe a branch `release`** com todas as suas alterações implementadas
+- [x] **Existe um Pull Request aberto** da branch `release` para a branch `main`
 
 ### 🔨 Validação de Build
 
@@ -738,15 +734,15 @@ npm run dc:up
 ```
 
 Verifique se:
-- [ ] Os containers sobem sem erros
-- [ ] A aplicação está acessível e funcionando
-- [ ] Todas as funcionalidades implementadas estão operacionais
-- [ ] Não há erros no console do navegador
-- [ ] Não há erros nos logs dos containers
+- [x] Os containers sobem sem erros
+- [x] A aplicação está acessível e funcionando
+- [x] Todas as funcionalidades implementadas estão operacionais
+- [x] Não há erros no console do navegador
+- [x] Não há erros nos logs dos containers
 
 ### 🔐 Variáveis de Ambiente
 
-- [ ] **Caso você crie novas chaves no `.env`**, lembre-se de incluí-las também no `.env.example` (tanto do backend quanto do frontend)
+- [x] **Caso você crie novas chaves no `.env`**, lembre-se de incluí-las também no `.env.example` (tanto do backend quanto do frontend)
 
 ---
 

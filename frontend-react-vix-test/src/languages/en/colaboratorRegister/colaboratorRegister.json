@@ -41,8 +41,11 @@
   "dontMatch": "Passwords don't match",
   "userCreated": "User successfully created",
   "userEdited": "User successfully edited",
+  "userDeleted": "User successfully deleted",
   "ok": "OK",
+  "cancel": "Cancel",
   "registersManagement": "Registers Management",
   "pinCode": "PinCode",
-  "areYouSure": "Are you sure you want to delete the {{ username }}?"
+  "delete": "Delete",
+  "areYouSure": "Are you sure you want to delete the"
 }

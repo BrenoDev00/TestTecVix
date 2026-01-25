@@ -283,6 +283,30 @@
         "username": {
           "type": "string"
         },
+        "fullname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "position": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "department": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "password": {
           "type": "string"
         },
@@ -312,6 +336,13 @@
           "default": true
         },
         "lastLoginDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "hiringDate": {
           "type": [
             "string",
             "null"

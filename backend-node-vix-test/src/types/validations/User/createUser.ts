@@ -1,10 +1,16 @@
 import { z } from "zod";
+import { userPasswordSchema } from "./userPassword";
 
 export const userCreatedSchema = z.object({
   username: z.string().min(1, "Username is required"),
-  password: z.string().min(8, "Password must be at least 8 characters long"), // Make safe password,
+  password: userPasswordSchema,
   email: z.string().email("Invalid email"),
   profileImgUrl: z.string().nullable().optional(),
+  fullname: z.string().optional(),
+  phone: z.string().optional(),
+  position: z.string().optional(),
+  department: z.string().optional(),
+  hiringDate: z.string().datetime().optional(),
   role: z.enum(["admin", "member", "manager"]).optional(),
   idBrandMaster: z.number().optional(),
   isActive: z.boolean().optional().default(false),

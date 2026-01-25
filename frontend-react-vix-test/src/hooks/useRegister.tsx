@@ -1,13 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { useZBrandInfo } from "../stores/useZBrandStore";
-import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {
   const { t } = useTranslation();
-  const { idBrand } = useZBrandInfo();
-  const navigate = useNavigate();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,12 +43,11 @@ export const useRegister = () => {
     }
 
     const response = await api.post({
-      url: "/user",
+      url: "/auth/register",
       data: {
         username,
         password,
         email,
-        idBrandMaster: idBrand,
       },
     });
 
@@ -60,7 +55,8 @@ export const useRegister = () => {
       toast.error(response.message);
       return;
     }
-    return navigate("/login");
+
+    toast.success(t("colaboratorRegister.userCreated"));
   };
 
   return { goRegister };

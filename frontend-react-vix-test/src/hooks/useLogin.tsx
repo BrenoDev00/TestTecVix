@@ -5,6 +5,7 @@ import { useZGlobalVar } from "../stores/useZGlobalVar";
 import { useZUserProfile } from "../stores/useZUserProfile";
 import { useNavigate } from "react-router-dom";
 import { useZResetAllStates } from "../stores/useZResetAllStates";
+import { useUserResources } from "./useUserResources";
 
 interface IUserLoginResponse {
   token: string | null;
@@ -22,12 +23,11 @@ interface IUserLoginResponse {
   };
 }
 
-
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsOpenModalUserNotActive, setLoginTime } =
-    useZGlobalVar();
+  const { setIsOpenModalUserNotActive, setLoginTime } = useZGlobalVar();
   const { setUser } = useZUserProfile();
+  const { updateUserLastLoginDate } = useUserResources();
   const { resetAllStates } = useZResetAllStates();
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export const useLogin = () => {
     }
 
     const response = await api.post<IUserLoginResponse>({
-      url: "/user/login",
+      url: "/auth/login",
       data: {
         username: username || undefined,
         password,
@@ -76,9 +76,13 @@ export const useLogin = () => {
       role: response.data.user.role,
     });
     setLoginTime(new Date());
+
+    return navigate("/");
   };
 
-  const goLogout = () => {
+  const goLogout = async () => {
+    await updateUserLastLoginDate();
+
     resetAllStates();
     return navigate("/login");
   };
