@@ -87,5 +87,37 @@ export const useUserResources = () => {
     return response.data;
   };
 
-  return { isLoading, updateUser, createUserByManager };
+  const updateUserLastLoginDate = async () => {
+    const auth = await getAuth();
+
+    await api.put({
+      auth,
+      url: `/user/lastLoginDate/${idUser}`,
+    });
+  };
+
+  const deleteUser = async (userId: string) => {
+    const auth = await getAuth();
+    setIsLoading(true);
+    const response = await api.delete<IUserDB>({
+      url: `/user/${userId}`,
+      auth,
+    });
+    setIsLoading(false);
+    if (response.error) {
+      toast.error(response.message);
+      return null;
+    }
+
+    toast.success(t("colaboratorRegister.userDeleted"));
+    return response.data;
+  };
+
+  return {
+    isLoading,
+    updateUser,
+    createUserByManager,
+    updateUserLastLoginDate,
+    deleteUser,
+  };
 };

@@ -1,12 +1,11 @@
-import { sign } from "jsonwebtoken";
+import { JwtPayload, sign } from "jsonwebtoken";
 import { AppError } from "../errors/AppError";
 import { verify } from "jsonwebtoken";
 import { JWT_SECRET } from "../constants/jwt-secret";
 import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { STATUS_CODE } from "../constants/statusCode";
 interface IPayload {
-  email: string;
-  password: string;
+  idUser: string;
 }
 
 export const genToken = (payload: IPayload) => {
@@ -19,9 +18,10 @@ export const genToken = (payload: IPayload) => {
 
 export const verifyToken = (token: string) => {
   try {
-    verify(token, JWT_SECRET);
+    const decodedToken = verify(token, JWT_SECRET) as JwtPayload;
 
-    return true;
+    const userId = decodedToken.idUser;
+    return userId;
   } catch {
     throw new AppError(ERROR_MESSAGE.INVALID_TOKEN, STATUS_CODE.UNAUTHORIZED);
   }

@@ -1,11 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -57,7 +55,8 @@ export const useRegister = () => {
       toast.error(response.message);
       return;
     }
-    return navigate("/login");
+
+    toast.success(t("colaboratorRegister.userCreated"));
   };
 
   return { goRegister };

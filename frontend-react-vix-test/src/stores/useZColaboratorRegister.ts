@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import {
-  IBrandMasterBasicInfo,
-} from "../types/BrandMasterTypes";
+import { IBrandMasterBasicInfo } from "../types/BrandMasterTypes";
+import { IUserDB } from "../hooks/useUserResources";
 
 export type Colaborator = {
   idUser: string;
@@ -61,6 +60,9 @@ interface IColaboratorRegister extends ColaboratorRegisterInputs {
   isEditing: number[];
   editInfos: editingInfos[];
   colaboratorNameFilter: string;
+  modalOpen: null | "deletedUser";
+  userToBeDeleted: IUserDB | null;
+  userDeleted: IUserDB | null;
   companyNameFilter: string;
   currentTabIndex: number;
   search: string;
@@ -78,6 +80,9 @@ const INITIAL_STATE: IColaboratorRegister = {
   colaboratorNameFilter: "",
   companyNameFilter: "",
   currentTabIndex: 0,
+  modalOpen: null,
+  userToBeDeleted: null,
+  userDeleted: null,
   search: "",
   page: 1,
   limit: 5,
@@ -97,6 +102,9 @@ interface IColaboratorRegisterState extends IColaboratorRegister {
   setStatus: (status: string) => void;
   setUsers: (users: Colaborator[]) => void;
   setIsEditing: (index: number[]) => void;
+  setModalOpen: (modalOpen: null | "deletedUser") => void;
+  setUserToBeDeleted: (userToBeDeleted: IUserDB | null) => void;
+  setUserDeleted: (userDeleted: IUserDB | null) => void;
   setEditInfos: (editingInfos: editingInfos[]) => void;
   setColaboratorNameFilter: (colaboratorNameFilter: string) => void;
   setCompanyNameFilter: (companyNameFilter: string) => void;
@@ -130,6 +138,12 @@ export const useZColaboratorRegister = create<IColaboratorRegisterState>(
     setUsers: (users: Colaborator[]) => set((state) => ({ ...state, users })),
     setIsEditing: (newEditing: number[]) =>
       set((state) => ({ ...state, isEditing: [...newEditing] })),
+    setModalOpen: (modalOpen: null | "deletedUser") =>
+      set((state) => ({ ...state, modalOpen })),
+    setUserToBeDeleted: (userToBeDeleted: IUserDB | null) =>
+      set((state) => ({ ...state, userToBeDeleted })),
+    setUserDeleted: (userDeleted: IUserDB | null) =>
+      set((state) => ({ ...state, userDeleted })),
     setEditInfos: (editingInfos: editingInfos[]) =>
       set((state) => ({ ...state, editInfos: [...editingInfos] })),
     setColaboratorNameFilter: (colaboratorNameFilter: string) =>

@@ -469,7 +469,7 @@ git commit -m "docs: atualiza README com credenciais de teste"
 
 ### 🔐 Autenticação e Autorização
 
-- [ ] Implementar as rotas de CRUD para usuários
+- [x] Implementar as rotas de CRUD para usuários
 - [x] Implementar rota de login do usuário
 - [x] Implementar tela de login `/login`
 - [x] Implementar rota de register do usuário
@@ -555,8 +555,8 @@ git commit -m "docs: atualiza README com credenciais de teste"
 **Referência visual**: `screenshots/CadastroDeFuncionarios.png`
 
 - [ ] Implementar a tela de **cadastro de funcionários** seguindo a imagem de referência
-- [ ] Atentar para a **responsividade**
-- [ ] Considerar as **traduções** (i18n)
+- [x] Atentar para a **responsividade**
+- [x] Considerar as **traduções** (i18n)
 
 ---
 
