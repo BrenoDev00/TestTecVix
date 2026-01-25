@@ -472,7 +472,7 @@ git commit -m "docs: atualiza README com credenciais de teste"
 - [x] Implementar tela de register `/register`
 - [x] Implementar autenticação com token JWT
 - [x] Proteger as rotas da aplicação (exceto login e register) para que somente usuários logados possam acessar
-- [ ] Adicionar credenciais de usuários de teste no README e/ou `.env.example`
+- [x] Adicionar credenciais de usuários de teste no README e/ou `.env.example`
 
 ---
 
@@ -695,9 +695,9 @@ Antes de enviar seu teste, **certifique-se de que**:
 
 ### 📌 Estrutura de Branches e Pull Request
 
-- [ ] **Existe a branch `main`** com o projeto original (sem modificações)
-- [ ] **Existe a branch `release`** com todas as suas alterações implementadas
-- [ ] **Existe um Pull Request aberto** da branch `release` para a branch `main`
+- [x] **Existe a branch `main`** com o projeto original (sem modificações)
+- [x] **Existe a branch `release`** com todas as suas alterações implementadas
+- [x] **Existe um Pull Request aberto** da branch `release` para a branch `main`
 
 ### 🔨 Validação de Build
 
@@ -734,15 +734,15 @@ npm run dc:up
 ```
 
 Verifique se:
-- [ ] Os containers sobem sem erros
-- [ ] A aplicação está acessível e funcionando
-- [ ] Todas as funcionalidades implementadas estão operacionais
-- [ ] Não há erros no console do navegador
-- [ ] Não há erros nos logs dos containers
+- [x] Os containers sobem sem erros
+- [x] A aplicação está acessível e funcionando
+- [x] Todas as funcionalidades implementadas estão operacionais
+- [x] Não há erros no console do navegador
+- [x] Não há erros nos logs dos containers
 
 ### 🔐 Variáveis de Ambiente
 
-- [ ] **Caso você crie novas chaves no `.env`**, lembre-se de incluí-las também no `.env.example` (tanto do backend quanto do frontend)
+- [x] **Caso você crie novas chaves no `.env`**, lembre-se de incluí-las também no `.env.example` (tanto do backend quanto do frontend)
 
 ---
 
